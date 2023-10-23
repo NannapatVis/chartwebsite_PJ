@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+
+{%block title %}
+  <title>char6</title>
+{% endblock %} 
+{% block content %} 
+<br>
+<center><font size = "5">จำนวนการตีพิมพ์แยกตามปี</font></center>
+<br>
+<div>
+  <a href="http://127.0.0.1:8000/graduate/chartpo1">
+    <button type="button" class="btn btn-warning">ย้อนกลับ</button>
+  </a>
+</div>
+<div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'polarArea',
+      data: {
+        labels: {{Cal_year_list|safe}},
+        datasets: [{
+          label: 'ปี',
+          data: {{Cal_year_number|safe}},
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  
+{%endblock%}

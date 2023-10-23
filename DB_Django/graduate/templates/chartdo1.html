@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+
+{%block title %}
+<title>char3</title>
+{% endblock %}
+{% block content %}
+<br>
+<center><font size = "5">จำนวนการตีพิมพ์แยกตามประเภท</font></center>
+<br>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <a href="http://127.0.0.1:8000/graduate/chartdo2">
+    <button class="btn btn-warning me-md-2" type="button">ถัดไป</button>
+  </a>
+</div>
+<div>
+    <canvas id="myChart" width="1" height="0.5"  ></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'doughnut', 
+      data: {
+        labels: {{course_list|safe}},
+        datasets: [{
+          label: 'จำนวนประเภทการตัพิมพ์',
+          data: {{number_list|safe}},
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  
+
+
+{%endblock%}

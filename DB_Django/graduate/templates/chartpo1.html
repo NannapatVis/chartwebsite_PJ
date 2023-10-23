@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{%block title %}
+  <title>char5</title>
+{% endblock %} 
+{% block content %}
+<br>
+<center><font size = "5">จำนวนการตีพิมพ์แยกตามประเภท</font></center>
+<br> 
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <a href="http://127.0.0.1:8000/graduate/chartpo2">
+    <button class="btn btn-warning me-md-2" type="button">ถัดไป</button>
+  </a>
+</div>
+<div>
+    <canvas id="myChart" aria-label="chart" height="10" width="10"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+      type: 'polarArea',
+      data: {
+        labels: {{course_list|safe}},
+        datasets: [{
+          label: 'จำนวนประเภทการตีพิมพ์',
+          data: {{number_list|safe}},
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+{%endblock%}
